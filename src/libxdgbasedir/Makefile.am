@@ -32,9 +32,6 @@ if OS_CYGWIN
 endif
 
 # Define separate include directories for C and C++ headers.
-libxdgbasedir_cdir = $(pkgincludedir)/c
 libxdgbasedir_cppdir = $(pkgincludedir)/c++
 
-libxdgbasedir_c_HEADERS    = c/errors.h
-libxdgbasedir_c_HEADERS   += c/libxdgbasedir.h
-libxdgbasedir_cpp_HEADERS  = c++/version.hpp
+libxdgbasedir_cpp_HEADERS  = library.h
