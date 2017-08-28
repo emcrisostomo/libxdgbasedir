@@ -28,6 +28,7 @@ AC_CONFIG_HEADERS([libxdgbasedir_config.h])
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([src/libxdgbasedir/Makefile])
 AC_CONFIG_FILES([po/Makefile.in])
+AC_CONFIG_FILES([doc/doxygen/Makefile])
 AC_CONFIG_MACRO_DIRS([m4])
 AC_CONFIG_MACRO_DIR([m4])
 
