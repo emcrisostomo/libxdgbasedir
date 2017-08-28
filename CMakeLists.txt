@@ -16,6 +16,8 @@ set(LOCALEDIR         "${CMAKE_INSTALL_PREFIX}/share/locale" CACHE FILEPATH "loc
 set(CMAKE_CXX_STANDARD 14)
 
 set(LIBXDGBASEDIR_HEADER_FILES
+        src/libxdgbasedir/gettext.h
+        src/libxdgbasedir/gettext_defs.h
         src/libxdgbasedir/library.h)
 
 set(LIBXDGBASEDIR_SOURCE_FILES
