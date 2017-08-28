@@ -15,14 +15,20 @@ set(LOCALEDIR         "${CMAKE_INSTALL_PREFIX}/share/locale" CACHE FILEPATH "loc
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(LIBXDGBASEDIR_HEADER_FILES
+set(
+        LIBXDGBASEDIR_HEADER_FILES
         src/libxdgbasedir/gettext.h
         src/libxdgbasedir/gettext_defs.h
-        src/libxdgbasedir/library.h)
+        src/libxdgbasedir/library.h
+        src/libxdgbasedir/libxdgbasedir.h
+)
 
-set(LIBXDGBASEDIR_SOURCE_FILES
+set(
+        LIBXDGBASEDIR_SOURCE_FILES
         src/libxdgbasedir/library.cpp
-        ${LIBXDGBASEDIR_HEADER_FILES})
+        src/libxdgbasedir/libxdgbasedir.cpp
+        ${LIBXDGBASEDIR_HEADER_FILES}
+)
 
 add_library(libxdgbasedir ${LIBXDGBASEDIR_SOURCE_FILES})
 set_target_properties(libxdgbasedir PROPERTIES OUTPUT_NAME xdgbasedir)
