@@ -20,11 +20,11 @@ AM_CPPFLAGS = -DLOCALEDIR=\"$(localedir)\"
 
 lib_LTLIBRARIES = libxdgbasedir.la
 
-libxdgbasedir_la_SOURCES  = library.h
+libxdgbasedir_la_SOURCES  = library.h library.cpp
 libxdgbasedir_la_SOURCES += gettext.h
 libxdgbasedir_la_SOURCES += gettext_defs.h
 
-libxdgbasedir_la_LDFLAGS  = -version-info $(libxdgbasedir_API_VERSION)
+libxdgbasedir_la_LDFLAGS  = -version-info $(LIBXDGBASEDIR_API_VERSION)
 libxdgbasedir_la_LDFLAGS += @LTLIBINTL@
 
 if OS_CYGWIN
