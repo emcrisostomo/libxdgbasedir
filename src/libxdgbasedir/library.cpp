@@ -1,6 +1,7 @@
 #include "library.h"
 
 #include <iostream>
+#include "gettext_defs.h"
 
 void hello()
 {
