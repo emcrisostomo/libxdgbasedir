@@ -19,7 +19,6 @@
 #include "gettext_defs.h"
 #include <cstdlib>
 
-
 static void fail_if_not_absolute_path(const std::string& path);
 
 namespace xdg
@@ -32,6 +31,12 @@ namespace xdg
   static constexpr const char xdg_runtime_dir[]{"XDG_RUNTIME_DIR"};
   static constexpr const char home[]{"HOME"};
   static constexpr const char xdg_data_home_suffix[]{"/.local/share"};
+
+  namespace env
+  {
+    static std::string get(const std::string& name, const std::string& default_value);
+    static std::string get(const std::string& name);
+  }
 }
 
 void fail_if_not_absolute_path(const std::string& path)

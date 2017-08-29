@@ -23,12 +23,6 @@
 
 namespace xdg
 {
-  namespace env
-  {
-    std::string get(const std::string& name, const std::string& default_value);
-    std::string get(const std::string& name);
-  }
-
   namespace data
   {
     std::string home();
