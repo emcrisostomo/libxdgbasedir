@@ -19,13 +19,11 @@ set(
         LIBXDGBASEDIR_HEADER_FILES
         src/libxdgbasedir/gettext.h
         src/libxdgbasedir/gettext_defs.h
-        src/libxdgbasedir/library.h
         src/libxdgbasedir/libxdgbasedir.h
 )
 
 set(
         LIBXDGBASEDIR_SOURCE_FILES
-        src/libxdgbasedir/library.cpp
         src/libxdgbasedir/libxdgbasedir.cpp
         ${LIBXDGBASEDIR_HEADER_FILES}
 )

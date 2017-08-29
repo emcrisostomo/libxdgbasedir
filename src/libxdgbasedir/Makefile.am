@@ -20,9 +20,10 @@ AM_CPPFLAGS = -DLOCALEDIR=\"$(localedir)\"
 
 lib_LTLIBRARIES = libxdgbasedir.la
 
-libxdgbasedir_la_SOURCES  = library.h library.cpp
-libxdgbasedir_la_SOURCES += gettext.h
+libxdgbasedir_la_SOURCES  = gettext.h
 libxdgbasedir_la_SOURCES += gettext_defs.h
+libxdgbasedir_la_SOURCES += libxdgbasedir.h libxdgbasedir.cpp
+
 
 libxdgbasedir_la_LDFLAGS  = -version-info $(LIBXDGBASEDIR_API_VERSION)
 libxdgbasedir_la_LDFLAGS += @LTLIBINTL@
@@ -34,4 +35,4 @@ endif
 # Define separate include directories for C and C++ headers.
 libxdgbasedir_cppdir = $(pkgincludedir)/c++
 
-libxdgbasedir_cpp_HEADERS  = library.h
+libxdgbasedir_cpp_HEADERS  = libxdgbasedir.h
