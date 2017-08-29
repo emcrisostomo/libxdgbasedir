@@ -15,4 +15,4 @@
 #
 # List of source files which contain translatable strings.
 #
-src/libxdgbasedir/library.cpp
+src/libxdgbasedir/libxdgbasedir.cpp
