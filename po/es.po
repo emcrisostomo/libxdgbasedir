@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libxdgbasedir 1.0.0-develop\n"
 "Report-Msgid-Bugs-To: enrico.m.crisostomo@gmail.com\n"
-"POT-Creation-Date: 2017-08-28 18:49+0200\n"
+"POT-Creation-Date: 2017-08-29 02:23+0200\n"
 "PO-Revision-Date: 2017-08-28 18:50+0200\n"
 "Last-Translator: Enrico Maria Crisostomo <enrico.m.crisostomo@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -18,6 +18,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/libxdgbasedir/library.cpp:7
-msgid "Hello, World!"
+#: src/libxdgbasedir/libxdgbasedir.cpp:41
+msgid ": not an absolute path"
+msgstr ""
+
+#: src/libxdgbasedir/libxdgbasedir.cpp:50
+msgid ": cannot be found"
 msgstr ""
