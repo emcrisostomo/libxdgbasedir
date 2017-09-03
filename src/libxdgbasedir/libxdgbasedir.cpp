@@ -21,16 +21,16 @@
 
 namespace xdg
 {
-  static constexpr const char xdg_data_home[]{"XDG_DATA_HOME"};
-  static constexpr const char xdg_data_dirs[]{"XDG_DATA_DIRS"};
-  static constexpr const char xdg_config_home[]{"XDG_CONFIG_HOME"};
-  static constexpr const char xdg_config_dirs[]{"XDG_CONFIG_DIRS"};
-  static constexpr const char xdg_cache_home[]{"XDG_CACHE_HOME"};
-  static constexpr const char xdg_runtime_dir[]{"XDG_RUNTIME_DIR"};
-  static constexpr const char home[]{"HOME"};
-  static constexpr const char xdg_data_home_suffix[]{"/.local/share"};
-  static constexpr const char xdg_config_home_suffix[]{"/.config"};
-  static constexpr const char xdg_data_dirs_default[]{"/usr/local/share/:/usr/share/"};
+  static constexpr const char XDG_DATA_HOME[]{"XDG_DATA_HOME"};
+  static constexpr const char XDG_DATA_DIRS[]{"XDG_DATA_DIRS"};
+  static constexpr const char XDG_CONFIG_HOME[]{"XDG_CONFIG_HOME"};
+  static constexpr const char XDG_CONFIG_DIRS[]{"XDG_CONFIG_DIRS"};
+  static constexpr const char XDG_CACHE_HOME[]{"XDG_CACHE_HOME"};
+  static constexpr const char XDG_RUNTIME_DIR[]{"XDG_RUNTIME_DIR"};
+  static constexpr const char HOME[]{"HOME"};
+  static constexpr const char XDG_DATA_HOME_SUFFIX[]{"/.local/share"};
+  static constexpr const char XDG_CONFIG_HOME_SUFFIX[]{"/.config"};
+  static constexpr const char XDG_DATA_DIRS_DEFAULT[]{"/usr/local/share/:/usr/share/"};
 
   namespace env
   {
@@ -65,11 +65,11 @@ namespace xdg
 
   std::string data::home()
   {
-    auto path = env::get(xdg_data_home, "");
+    auto path = env::get(XDG_DATA_HOME, "");
 
     if (path.empty())
     {
-      path += env::get(xdg::home) + xdg_data_home_suffix;
+      path += env::get(xdg::HOME) + XDG_DATA_HOME_SUFFIX;
     }
 
     fail_if_not_absolute_path(path);
@@ -79,11 +79,11 @@ namespace xdg
 
   std::vector<std::string> data::dirs()
   {
-    auto paths = env::get(xdg_data_dirs, "");
+    auto paths = env::get(XDG_DATA_DIRS, "");
 
     if (paths.empty())
     {
-      paths = xdg_data_dirs_default;
+      paths = XDG_DATA_DIRS_DEFAULT;
     }
 
     std::vector<std::string> vec;
@@ -106,11 +106,11 @@ namespace xdg
 
   std::string config::home()
   {
-    auto path = env::get(xdg_config_home, "");
+    auto path = env::get(XDG_CONFIG_HOME, "");
 
     if (path.empty())
     {
-      path += env::get(xdg::home) + xdg_config_home_suffix;
+      path += env::get(xdg::HOME) + XDG_CONFIG_HOME_SUFFIX;
     }
 
     fail_if_not_absolute_path(path);
