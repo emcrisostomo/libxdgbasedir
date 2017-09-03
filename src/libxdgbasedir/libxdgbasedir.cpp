@@ -39,6 +39,35 @@ namespace xdg
     static std::string get(const std::string& name);
   }
 
+  namespace string_utils
+  {
+    template<typename Out>
+    static void split(const std::string& s, const std::string& delimiter, Out result)
+    {
+
+      size_t start = 0;
+      size_t end = s.find(delimiter);
+
+      while (end != std::string::npos)
+      {
+        *(result++) = s.substr(start, end - start);
+        start = end + delimiter.length();
+        end = s.find(delimiter, start);
+      }
+
+      *(result++) = s.substr(start, end);
+    }
+
+
+    static std::vector<std::string> split(const std::string& s, const std::string& delimiter)
+    {
+      std::vector<std::string> tokens;
+      split(s, delimiter, std::back_inserter(tokens));
+
+      return tokens;
+    }
+  }
+
   static void fail_if_not_absolute_path(const std::string& path);
 
   void fail_if_not_absolute_path(const std::string& path)
@@ -87,22 +116,7 @@ namespace xdg
       paths = XDG_DATA_DIRS_DEFAULT;
     }
 
-    std::vector<std::string> vec;
-    std::string dir_separator = ":";
-
-    size_t start = 0;
-    size_t end = paths.find(dir_separator);
-
-    while (end != std::string::npos)
-    {
-      vec.push_back(paths.substr(start, end - start));
-      start = end + dir_separator.length();
-      end = paths.find(dir_separator, start);
-    }
-
-    vec.push_back(paths.substr(start, end));
-
-    return vec;
+    return string_utils::split(paths, ":");
   }
 
   std::string config::home()
@@ -128,21 +142,6 @@ namespace xdg
       paths = XDG_CONFIG_DIRS_DEFAULT;
     }
 
-    std::vector<std::string> vec;
-    std::string dir_separator = ":";
-
-    size_t start = 0;
-    size_t end = paths.find(dir_separator);
-
-    while (end != std::string::npos)
-    {
-      vec.push_back(paths.substr(start, end - start));
-      start = end + dir_separator.length();
-      end = paths.find(dir_separator, start);
-    }
-
-    vec.push_back(paths.substr(start, end));
-
-    return vec;
+    return string_utils::split(paths, ":");
   }
 }
