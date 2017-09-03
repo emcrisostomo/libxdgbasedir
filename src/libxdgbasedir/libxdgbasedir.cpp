@@ -100,7 +100,7 @@ namespace xdg
 
     if (path.empty())
     {
-      path += env::get(HOME) + XDG_DATA_HOME_SUFFIX;
+      path = env::get(HOME) + XDG_DATA_HOME_SUFFIX;
     }
 
     fail_if_not_absolute_path(path);
@@ -126,7 +126,7 @@ namespace xdg
 
     if (path.empty())
     {
-      path += env::get(HOME) + XDG_CONFIG_HOME_SUFFIX;
+      path = env::get(HOME) + XDG_CONFIG_HOME_SUFFIX;
     }
 
     fail_if_not_absolute_path(path);
@@ -152,7 +152,7 @@ namespace xdg
 
     if (path.empty())
     {
-      path += env::get(HOME) + XDG_CACHE_HOME_SUFFIX;
+      path = env::get(HOME) + XDG_CACHE_HOME_SUFFIX;
     }
 
     fail_if_not_absolute_path(path);
