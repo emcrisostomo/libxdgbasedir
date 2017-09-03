@@ -31,6 +31,7 @@ namespace xdg
   static constexpr const char XDG_DATA_HOME_SUFFIX[]{"/.local/share"};
   static constexpr const char XDG_CONFIG_HOME_SUFFIX[]{"/.config"};
   static constexpr const char XDG_DATA_DIRS_DEFAULT[]{"/usr/local/share/:/usr/share/"};
+  static constexpr const char XDG_CONFIG_DIRS_DEFAULT[]{"/etc/xdg"};
 
   namespace env
   {
@@ -116,5 +117,32 @@ namespace xdg
     fail_if_not_absolute_path(path);
 
     return path;
+  }
+
+  std::vector<std::string> config::dirs()
+  {
+    auto paths = env::get(XDG_CONFIG_DIRS, "");
+
+    if (paths.empty())
+    {
+      paths = XDG_CONFIG_DIRS_DEFAULT;
+    }
+
+    std::vector<std::string> vec;
+    std::string dir_separator = ":";
+
+    size_t start = 0;
+    size_t end = paths.find(dir_separator);
+
+    while (end != std::string::npos)
+    {
+      vec.push_back(paths.substr(start, end - start));
+      start = end + dir_separator.length();
+      end = paths.find(dir_separator, start);
+    }
+
+    vec.push_back(paths.substr(start, end));
+
+    return vec;
   }
 }
