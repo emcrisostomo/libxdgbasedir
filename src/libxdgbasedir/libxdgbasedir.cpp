@@ -19,8 +19,6 @@
 #include "gettext_defs.h"
 #include <cstdlib>
 
-static void fail_if_not_absolute_path(const std::string& path);
-
 namespace xdg
 {
   static constexpr const char xdg_data_home[]{"XDG_DATA_HOME"};
@@ -31,47 +29,92 @@ namespace xdg
   static constexpr const char xdg_runtime_dir[]{"XDG_RUNTIME_DIR"};
   static constexpr const char home[]{"HOME"};
   static constexpr const char xdg_data_home_suffix[]{"/.local/share"};
+  static constexpr const char xdg_config_home_suffix[]{"/.config"};
+  static constexpr const char xdg_data_dirs_default[]{"/usr/local/share/:/usr/share/"};
 
   namespace env
   {
     static std::string get(const std::string& name, const std::string& default_value);
     static std::string get(const std::string& name);
   }
-}
 
-void fail_if_not_absolute_path(const std::string& path)
-{
-  if (path.empty() || path[0] != '/')
+  static void fail_if_not_absolute_path(const std::string& path);
+
+  void fail_if_not_absolute_path(const std::string& path)
   {
-    throw std::runtime_error(path + _(": not an absolute path"));
-  }
-}
-
-std::string xdg::env::get(const std::string& name)
-{
-  if (auto value = std::getenv(name.c_str()))
-    return value;
-
-  throw std::runtime_error(name + _(": cannot be found"));
-}
-
-std::string xdg::env::get(const std::string& name, const std::string& default_value)
-{
-  if (auto value = std::getenv(name.c_str()))
-    return value;
-  return default_value;
-}
-
-std::string xdg::data::home()
-{
-  auto path = env::get(xdg::xdg_data_home, "");
-
-  if (path.empty())
-  {
-    path += env::get(xdg::home) + xdg::xdg_data_home_suffix;
+    if (path.empty() || path[0] != '/')
+    {
+      throw std::runtime_error(path + _(": not an absolute path"));
+    }
   }
 
-  fail_if_not_absolute_path(path);
+  std::string env::get(const std::string& name)
+  {
+    if (auto value = std::getenv(name.c_str()))
+      return value;
 
-  return path;
+    throw std::runtime_error(name + _(": cannot be found"));
+  }
+
+  std::string env::get(const std::string& name, const std::string& default_value)
+  {
+    if (auto value = std::getenv(name.c_str()))
+      return value;
+    return default_value;
+  }
+
+  std::string data::home()
+  {
+    auto path = env::get(xdg_data_home, "");
+
+    if (path.empty())
+    {
+      path += env::get(xdg::home) + xdg_data_home_suffix;
+    }
+
+    fail_if_not_absolute_path(path);
+
+    return path;
+  }
+
+  std::vector<std::string> data::dirs()
+  {
+    auto paths = env::get(xdg_data_dirs, "");
+
+    if (paths.empty())
+    {
+      paths = xdg_data_dirs_default;
+    }
+
+    std::vector<std::string> vec;
+    std::string dir_separator = ":";
+
+    size_t start = 0;
+    size_t end = paths.find(dir_separator);
+
+    while (end != std::string::npos)
+    {
+      vec.push_back(paths.substr(start, end - start));
+      start = end + dir_separator.length();
+      end = paths.find(dir_separator, start);
+    }
+
+    vec.push_back(paths.substr(start, end));
+
+    return vec;
+  }
+
+  std::string config::home()
+  {
+    auto path = env::get(xdg_config_home, "");
+
+    if (path.empty())
+    {
+      path += env::get(xdg::home) + xdg_config_home_suffix;
+    }
+
+    fail_if_not_absolute_path(path);
+
+    return path;
+  }
 }
