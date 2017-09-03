@@ -30,6 +30,7 @@ namespace xdg
   static constexpr const char HOME[]{"HOME"};
   static constexpr const char XDG_DATA_HOME_SUFFIX[]{"/.local/share"};
   static constexpr const char XDG_CONFIG_HOME_SUFFIX[]{"/.config"};
+  static constexpr const char XDG_CACHE_HOME_SUFFIX[]{"/.cache"};
   static constexpr const char XDG_DATA_DIRS_DEFAULT[]{"/usr/local/share/:/usr/share/"};
   static constexpr const char XDG_CONFIG_DIRS_DEFAULT[]{"/etc/xdg"};
 
@@ -143,5 +144,19 @@ namespace xdg
     }
 
     return string_utils::split(paths, ":");
+  }
+
+  std::string cache::home()
+  {
+    auto path = env::get(XDG_CACHE_HOME, "");
+
+    if (path.empty())
+    {
+      path += env::get(HOME) + XDG_CACHE_HOME_SUFFIX;
+    }
+
+    fail_if_not_absolute_path(path);
+
+    return path;
   }
 }
