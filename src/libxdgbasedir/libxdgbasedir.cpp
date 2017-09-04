@@ -159,4 +159,9 @@ namespace xdg
 
     return path;
   }
+
+  std::string runtime::dir()
+  {
+    return env::get(XDG_RUNTIME_DIR, "");
+  }
 }
