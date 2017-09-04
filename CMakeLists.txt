@@ -73,3 +73,13 @@ if (USE_NLS)
 
     gettext_process_pot_file(po/${PACKAGE}.pot ALL INSTALL_DESTINATION share/locale LANGUAGES ${LINGUAS})
 endif ()
+
+# install targets
+install(TARGETS libxdgbasedir DESTINATION lib)
+install(FILES ${LIBXDGBASEDIR_HEADER_FILES} DESTINATION include/libxdgbasedir)
+
+# testing
+include(CTest)
+
+add_executable(libxdgbasedir-printall test/libxdgbasedir-printall.cpp)
+target_link_libraries(libxdgbasedir-printall libxdgbasedir)
