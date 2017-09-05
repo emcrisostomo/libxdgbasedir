@@ -25,6 +25,10 @@
 
 void check_data_home();
 void check_data_dirs();
+void check_config_home();
+void check_config_dirs();
+void check_cache_home();
+void check_runtime_dir();
 
 static const unsigned int NUM = 10;
 static std::default_random_engine rng;
@@ -33,13 +37,10 @@ int main(int argc, char **argv)
 {
   check_data_home();
   check_data_dirs();
-
-  std::cout << xdg::config::home() << "\n";
-  for (const auto& p : xdg::config::dirs()) std::cout << p << "\n";
-
-  std::cout << xdg::cache::home() << "\n";
-
-  std::cout << xdg::runtime::dir() << "\n";
+  check_config_home();
+  check_config_dirs();
+  check_cache_home();
+  check_runtime_dir();
 }
 
 void check_data_home()
@@ -64,4 +65,42 @@ void check_data_dirs()
 
   setenv(xdg::XDG_DATA_DIRS.c_str(), s.c_str(), 1);
   assert(xdg::data::dirs() == data_dirs);
+}
+
+void check_config_home()
+{
+  std::string tmp("/tmp" + std::to_string(rng()));
+  setenv(xdg::XDG_CONFIG_HOME.c_str(), tmp.c_str(), 1);
+  assert(xdg::config::home() == tmp);
+}
+
+void check_config_dirs()
+{
+  std::vector<std::string> data_dirs;
+  for (auto i = 0; i < NUM; ++i) data_dirs.emplace_back("/tmp" + std::to_string(rng()));
+
+  std::string s = std::accumulate(std::begin(data_dirs),
+                                  std::end(data_dirs),
+                                  std::string(),
+                                  [](std::string& previous, std::string& next)
+                                  {
+                                    return previous.empty() ? next : previous + ":" + next;
+                                  });
+
+  setenv(xdg::XDG_CONFIG_DIRS.c_str(), s.c_str(), 1);
+  assert(xdg::config::dirs() == data_dirs);
+}
+
+void check_cache_home()
+{
+  std::string tmp("/tmp" + std::to_string(rng()));
+  setenv(xdg::XDG_CACHE_HOME.c_str(), tmp.c_str(), 1);
+  assert(xdg::cache::home() == tmp);
+}
+
+void check_runtime_dir()
+{
+  std::string tmp("/tmp" + std::to_string(rng()));
+  setenv(xdg::XDG_RUNTIME_DIR.c_str(), tmp.c_str(), 1);
+  assert(xdg::runtime::dir() == tmp);
 }
