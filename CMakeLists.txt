@@ -83,3 +83,8 @@ include(CTest)
 
 add_executable(libxdgbasedir-printall test/libxdgbasedir-printall.cpp)
 target_link_libraries(libxdgbasedir-printall libxdgbasedir)
+add_test(libxdgbasedir-printall libxdgbasedir-printall)
+
+add_executable(libxdgbasedir-check-values test/libxdgbasedir-check-values.cpp)
+target_link_libraries(libxdgbasedir-check-values libxdgbasedir)
+add_test(libxdgbasedir-check-values libxdgbasedir-check-values)
