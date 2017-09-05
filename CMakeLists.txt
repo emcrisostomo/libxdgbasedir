@@ -88,3 +88,17 @@ add_test(libxdgbasedir-printall libxdgbasedir-printall)
 add_executable(libxdgbasedir-check-values test/libxdgbasedir-check-values.cpp)
 target_link_libraries(libxdgbasedir-check-values libxdgbasedir)
 add_test(libxdgbasedir-check-values libxdgbasedir-check-values)
+
+# installer
+include(InstallRequiredSystemLibraries)
+#@formatter:off
+# Remove and default to project description when migrated to CMake 3.9
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Simple C++ implementation of the XDG Base Directory Specification")
+set(CPACK_PACKAGE_VERSION_MAJOR       "${PROJECT_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR       "${PROJECT_VERSION_MINOR}")
+set(CPACK_PACKAGE_VERSION_PATCH       "${PROJECT_VERSION_PATCH}")
+set(CPACK_PACKAGE_VENDOR              "${PACKAGE_AUTHOR}")
+set(CPACK_RESOURCE_FILE_LICENSE       "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
+set(CPACK_GENERATOR                   "STGZ;TGZ")
+#@formatter:on
+include(CPack)
