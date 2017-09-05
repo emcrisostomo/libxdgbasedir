@@ -23,12 +23,12 @@
 
 namespace xdg
 {
-  static constexpr const char XDG_DATA_HOME[]{"XDG_DATA_HOME"};
-  static constexpr const char XDG_DATA_DIRS[]{"XDG_DATA_DIRS"};
-  static constexpr const char XDG_CONFIG_HOME[]{"XDG_CONFIG_HOME"};
-  static constexpr const char XDG_CONFIG_DIRS[]{"XDG_CONFIG_DIRS"};
-  static constexpr const char XDG_CACHE_HOME[]{"XDG_CACHE_HOME"};
-  static constexpr const char XDG_RUNTIME_DIR[]{"XDG_RUNTIME_DIR"};
+  static const std::string XDG_DATA_HOME{"XDG_DATA_HOME"};
+  static const std::string XDG_DATA_DIRS{"XDG_DATA_DIRS"};
+  static const std::string XDG_CONFIG_HOME{"XDG_CONFIG_HOME"};
+  static const std::string XDG_CONFIG_DIRS{"XDG_CONFIG_DIRS"};
+  static const std::string XDG_CACHE_HOME{"XDG_CACHE_HOME"};
+  static const std::string XDG_RUNTIME_DIR{"XDG_RUNTIME_DIR"};
 
   namespace data
   {
