@@ -34,7 +34,7 @@ Features
 
 `libxdgbasedir` provides the following functionality:
 
-  * It resolves the paths specified by the XDG Base Directory Specification.
+  * It resolves the paths specified by the _XDG Base Directory Specification_.
 
 Getting libxdgbasedir
 ---------------------
