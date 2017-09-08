@@ -13,6 +13,6 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-m4_define([LIBXDGBASEDIR_VERSION], [1.1.0])
+m4_define([LIBXDGBASEDIR_VERSION], [1.2.0-develop])
 m4_define([LIBXDGBASEDIR_API_VERSION], [0:0:0])
 m4_define([LIBXDGBASEDIR_REVISION], [1])
