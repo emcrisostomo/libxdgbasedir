@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.8)
-project(libxdgbasedir VERSION 1.0.0)
+project(libxdgbasedir VERSION 1.1.0)
 
 #@formatter:off
 set(PACKAGE           "libxdgbasedir")
 set(PACKAGE_NAME      "${PACKAGE}")
-set(PACKAGE_VERSION   "${PROJECT_VERSION}-develop")
+set(PACKAGE_VERSION   "${PROJECT_VERSION}")
 set(PACKAGE_STRING    "${PACKAGE_NAME} ${PACKAGE_VERSION}")
 set(PACKAGE_AUTHOR    "enrico.m.crisostomo@gmail.com")
 set(PACKAGE_BUGREPORT "${PACKAGE_AUTHOR}")
