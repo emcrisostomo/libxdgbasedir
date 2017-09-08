@@ -63,14 +63,21 @@ namespace xdg
     }
   }
 
-  static void fail_if_not_absolute_path(const std::string& path);
+  static bool is_absolute_path(const std::string& path);
+  static std::vector<std::string> remove_relative_paths(const std::vector<std::string>& paths);
 
-  void fail_if_not_absolute_path(const std::string& path)
+  bool is_absolute_path(const std::string& path)
   {
-    if (path.empty() || path[0] != '/')
-    {
-      throw std::runtime_error(path + _(": not an absolute path"));
-    }
+    return (!path.empty() && path[0] == '/');
+  }
+
+  std::vector<std::string> remove_relative_paths(const std::vector<std::string>& paths)
+  {
+    std::vector<std::string> absolute_paths;
+
+    for (const auto& p : paths) if (is_absolute_path(p)) absolute_paths.push_back(p);
+
+    return absolute_paths;
   }
 
   std::string env::get(const std::string& name)
@@ -92,12 +99,12 @@ namespace xdg
   {
     auto path = env::get(XDG_DATA_HOME, "");
 
-    if (path.empty())
+    if (!is_absolute_path(path))
     {
       path = env::get(HOME) + XDG_DATA_HOME_SUFFIX;
     }
 
-    fail_if_not_absolute_path(path);
+    if (!is_absolute_path(path)) path = {};
 
     return path;
   }
@@ -111,19 +118,19 @@ namespace xdg
       paths = XDG_DATA_DIRS_DEFAULT;
     }
 
-    return string_utils::split(paths, ":");
+    return remove_relative_paths(string_utils::split(paths, ":"));
   }
 
   std::string config::home()
   {
     auto path = env::get(XDG_CONFIG_HOME, "");
 
-    if (path.empty())
+    if (!is_absolute_path(path))
     {
       path = env::get(HOME) + XDG_CONFIG_HOME_SUFFIX;
     }
 
-    fail_if_not_absolute_path(path);
+    if (!is_absolute_path(path)) path = {};
 
     return path;
   }
@@ -137,25 +144,29 @@ namespace xdg
       paths = XDG_CONFIG_DIRS_DEFAULT;
     }
 
-    return string_utils::split(paths, ":");
+    return remove_relative_paths(string_utils::split(paths, ":"));
   }
 
   std::string cache::home()
   {
     auto path = env::get(XDG_CACHE_HOME, "");
 
-    if (path.empty())
+    if (!is_absolute_path(path))
     {
       path = env::get(HOME) + XDG_CACHE_HOME_SUFFIX;
     }
 
-    fail_if_not_absolute_path(path);
+    if (!is_absolute_path(path)) path = {};
 
     return path;
   }
 
   std::string runtime::dir()
   {
-    return env::get(XDG_RUNTIME_DIR, "");
+    auto path = env::get(XDG_RUNTIME_DIR, "");
+
+    if (!is_absolute_path(path)) path = {};
+
+    return path;
   }
 }
