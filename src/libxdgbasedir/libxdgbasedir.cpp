@@ -18,6 +18,7 @@
 #include "libxdgbasedir.h"
 #include "gettext_defs.h"
 #include <cstdlib>
+#include <stdexcept>
 
 namespace xdg
 {
