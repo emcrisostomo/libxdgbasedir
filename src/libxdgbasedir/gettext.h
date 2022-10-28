@@ -63,7 +63,7 @@
    On pre-ANSI systems without 'const', the config.h file is supposed to
    contain "#define const".  */
 # undef gettext
-# define gettext(Msgid) ((const char *) (Msgid))
+# define gettext(Msgid) (static_cast<const char *>(Msgid))
 # undef dgettext
 # define dgettext(Domainname, Msgid) ((void) (Domainname), gettext (Msgid))
 # undef dcgettext
@@ -72,8 +72,8 @@
 # undef ngettext
 # define ngettext(Msgid1, Msgid2, N) \
     ((N) == 1 \
-     ? ((void) (Msgid2), (const char *) (Msgid1)) \
-     : ((void) (Msgid1), (const char *) (Msgid2)))
+     ? ((void) (Msgid2), static_cast<const char*>(Msgid1)) \
+     : ((void) (Msgid1), static_cast<const char*>(Msgid2)))
 # undef dngettext
 # define dngettext(Domainname, Msgid1, Msgid2, N) \
     ((void) (Domainname), ngettext (Msgid1, Msgid2, N))
