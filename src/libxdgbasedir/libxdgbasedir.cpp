@@ -77,6 +77,7 @@ namespace xdg
     std::vector<std::string> absolute_paths;
 
     for (const auto& p : paths) if (is_absolute_path(p)) absolute_paths.push_back(p);
+    absolute_paths.shrink_to_fit();
 
     return absolute_paths;
   }
