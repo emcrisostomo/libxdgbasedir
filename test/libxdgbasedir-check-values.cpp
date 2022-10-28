@@ -35,7 +35,7 @@ void check_relative_runtime_dir();
 static const unsigned int NUM = 10;
 static std::default_random_engine rng;
 
-int main(int argc, char **argv)
+int main(int /*argc*/, char ** /*argv*/)
 {
   check_data_home();
   check_data_dirs();
