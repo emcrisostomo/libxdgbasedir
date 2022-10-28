@@ -42,7 +42,9 @@ include(CheckIncludeFileCXX)
 include(CheckSymbolExists)
 
 include_directories("${PROJECT_BINARY_DIR}")
-include_directories("${Intl_INCLUDE_DIRS}")
+if (Intl_LIBRARIES)
+	include_directories("${Intl_INCLUDE_DIRS}")
+endif ()
 
 # check for gettext and libintl
 check_include_file_cxx(getopt.h HAVE_GETOPT_H)
