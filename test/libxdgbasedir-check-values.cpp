@@ -58,7 +58,7 @@ void check_data_home()
 void check_data_dirs()
 {
   std::vector<std::string> data_dirs;
-  for (auto i = 0; i < NUM; ++i) data_dirs.emplace_back("/tmp" + std::to_string(rng()));
+  for (auto i = 0u; i < NUM; ++i) data_dirs.emplace_back("/tmp" + std::to_string(rng()));
 
   std::string s = std::accumulate(std::begin(data_dirs),
                                   std::end(data_dirs),
@@ -82,7 +82,7 @@ void check_config_home()
 void check_config_dirs()
 {
   std::vector<std::string> data_dirs;
-  for (auto i = 0; i < NUM; ++i) data_dirs.emplace_back("/tmp" + std::to_string(rng()));
+  for (auto i = 0u; i < NUM; ++i) data_dirs.emplace_back("/tmp" + std::to_string(rng()));
 
   std::string s = std::accumulate(std::begin(data_dirs),
                                   std::end(data_dirs),
@@ -114,8 +114,8 @@ void check_relative_data_dirs()
 {
   std::vector<std::string> abs_data_dirs;
   std::vector<std::string> relative_data_dirs;
-  for (auto i = 0; i < NUM; ++i) abs_data_dirs.emplace_back("/tmp" + std::to_string(rng()));
-  for (auto i = 0; i < NUM; ++i) relative_data_dirs.emplace_back("relative/tmp" + std::to_string(rng()));
+  for (auto i = 0u; i < NUM; ++i) abs_data_dirs.emplace_back("/tmp" + std::to_string(rng()));
+  for (auto i = 0u; i < NUM; ++i) relative_data_dirs.emplace_back("relative/tmp" + std::to_string(rng()));
 
   std::string s = std::accumulate(std::begin(abs_data_dirs),
                                   std::end(abs_data_dirs),
