@@ -20,7 +20,7 @@
 #include <string>
 #include <iostream>
 
-int main(int argc, char **argv)
+int main(int /*argc*/, char ** /*argv*/)
 {
   std::cout << xdg::data::home() << "\n";
   for (const auto& p : xdg::data::dirs()) std::cout << p << "\n";
